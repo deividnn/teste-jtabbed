@@ -34,6 +34,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 import controller.ProdutoController;
 import entidades.Produto;
+import javax.swing.ImageIcon;
 import static telas.Menu.ta;
 import util.Maiusculo;
 import util.Util;
@@ -58,16 +59,15 @@ public class IProdutos extends javax.swing.JInternalFrame {
         txtespec.setDocument(new Maiusculo(2000));
         txtcarac.setDocument(new Maiusculo(2000));
 
-       
         txtdataentrada.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseReleased(MouseEvent e) {
-             JXDatePicker picker = new JXDatePicker();
-        picker.setDate(Calendar.getInstance().getTime());
-        picker.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
-        
-        }
-    });
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                JXDatePicker picker = new JXDatePicker();
+                picker.setDate(Calendar.getInstance().getTime());
+                picker.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
+
+            }
+        });
 
         cancelar();
 
@@ -111,7 +111,7 @@ public class IProdutos extends javax.swing.JInternalFrame {
         colModel.getColumn(7).setPreferredWidth(200);
         colModel.getColumn(8).setPreferredWidth(150);
         colModel.getColumn(10).setPreferredWidth(150);
-        
+
         txtdataentrada.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
 
     }
@@ -564,10 +564,10 @@ public class IProdutos extends javax.swing.JInternalFrame {
         }
         cstatus.setSelectedItem((String) tabela.getValueAt(tabela.getSelectedRow(), 3));
         txtentrada.setText(String.valueOf(tabela.getValueAt(tabela.getSelectedRow(), 4)));
-        txtsaida.setText(String.valueOf( tabela.getValueAt(tabela.getSelectedRow(), 5)));
+        txtsaida.setText(String.valueOf(tabela.getValueAt(tabela.getSelectedRow(), 5)));
         txtfornecedor.setText((String) tabela.getValueAt(tabela.getSelectedRow(), 6));
         txtcontato.setText((String) tabela.getValueAt(tabela.getSelectedRow(), 7));
-        
+
         Object objx = tabela.getValueAt(tabela.getSelectedRow(), 8);
         if (objx instanceof String) {
             try {
@@ -576,7 +576,7 @@ public class IProdutos extends javax.swing.JInternalFrame {
                 Logger.getLogger(IProdutos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         lusuario.setText("" + tabela.getValueAt(tabela.getSelectedRow(), 9));
 
         Object obj = tabela.getValueAt(tabela.getSelectedRow(), 10);
@@ -601,7 +601,7 @@ public class IProdutos extends javax.swing.JInternalFrame {
             txt.add(txtfornecedor);
             txt.add(txtentrada);
             txt.add(txtsaida);
-       
+
             if (txtcodigo.getText() == null) {
                 txtcodigo.setText("");
             }
@@ -621,7 +621,7 @@ public class IProdutos extends javax.swing.JInternalFrame {
                     u.setSaida(Integer.valueOf(txtsaida.getText()));
                     u.setCaracteristicas(txtcarac.getText());
                     u.setEspecificacoes(txtespec.getText());
-                    u.setDataentrada((Date)txtdataentrada.getEditor().getValue());
+                    u.setDataentrada((Date) txtdataentrada.getEditor().getValue());
                     u.setValordia(new BigDecimal(txtpreco.getText().replaceAll("\\.", "").replaceAll(",", ".")));
                     if (!txtcodigo.getText().isEmpty()) {
                         u.setId(new Long(txtcodigo.getText()));

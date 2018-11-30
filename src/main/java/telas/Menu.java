@@ -14,12 +14,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
@@ -33,7 +36,7 @@ import util.Util;
  * @author deividnn
  */
 public class Menu extends javax.swing.JFrame {
-
+    
     public static Long loja;
     public static List<JInternalFrame> janelas;
     public static Long idusuario;
@@ -47,7 +50,7 @@ public class Menu extends javax.swing.JFrame {
         loja = new Long(1);
         new Thread(new DT()).start();
         menu.add(Box.createHorizontalGlue());
-
+        
         JMenu k = new JMenu("SAIR");
         k.setForeground(Color.red);
         k.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -61,14 +64,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         menu.add(k);
-
+        
         maximizarFrame();
         telas.setSize(getSize().width, getSize().height - 50);
-
+        
     }
-
+    
     public static class DT implements Runnable {
-
+        
         @Override
         public void run() {
             while (true) {
@@ -80,7 +83,7 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         }
-
+        
     }
 
     /**
@@ -294,6 +297,13 @@ public class Menu extends javax.swing.JFrame {
         telas.addTab(iu.getTitle(), iu);
         criarmenuitem(iu.getTitle(), iu);
         telas.setSelectedIndex(telas.getTabCount() - 1);
+         
+        try {
+            ImageIcon imageIcon = new ImageIcon("ico.png");
+            telas.setIconAt(telas.getTabCount()-1, imageIcon);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         try {
             iu.setSelected(true);
         } catch (PropertyVetoException ex) {
@@ -356,6 +366,13 @@ public class Menu extends javax.swing.JFrame {
         telas.addTab(iu.getTitle(), iu);
         criarmenuitem(iu.getTitle(), iu);
         telas.setSelectedIndex(telas.getTabCount() - 1);
+         
+        try {
+            ImageIcon imageIcon = new ImageIcon("ico.png");
+            telas.setIconAt(telas.getTabCount()-1, imageIcon);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         try {
             iu.setSelected(true);
         } catch (PropertyVetoException ex) {
@@ -379,7 +396,7 @@ public class Menu extends javax.swing.JFrame {
                     }
                 }
             }
-
+            
         }
 
     }//GEN-LAST:event_fechartodasActionPerformed
@@ -407,17 +424,33 @@ public class Menu extends javax.swing.JFrame {
         telas.addTab(iu.getTitle(), iu);
         criarmenuitem(iu.getTitle(), iu);
         telas.setSelectedIndex(telas.getTabCount() - 1);
+        
+        try {
+            ImageIcon imageIcon = new ImageIcon("ico.png");
+            telas.setIconAt(telas.getTabCount()-1, imageIcon);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
         try {
             iu.setSelected(true);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
-
+    
     public void criarmenuitem(String t, JInternalFrame i) {
         JMenuItem m = new JMenuItem(t);
         m.setName(t.trim());
-        int pos=telas.getTabCount()-1;
+        ImageIcon imageIcon;
+        try {
+            imageIcon = new ImageIcon("ico.png");
+            m.setIcon(imageIcon);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        int pos = telas.getTabCount() - 1;
         m.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -426,7 +459,7 @@ public class Menu extends javax.swing.JFrame {
         });
         ta.add(m);
     }
-
+    
     private void maximizarFrame() throws HeadlessException {
         // TODO add your handling code here:
 
